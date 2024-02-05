@@ -2,6 +2,7 @@ package campaign
 
 import (
 	"github.com/vinialeixo/email-markegint/internal/dto"
+	"github.com/vinialeixo/email-markegint/internal/helper"
 )
 
 type Service struct {
@@ -15,9 +16,8 @@ func (s *Service) Create(newCampaign dto.NewCampaignRequest) (string, error) {
 		return "", err
 	}
 	err = s.Repository.Save(campaign)
-
 	if err != nil {
-		return "", err
+		return "", helper.ErrInternal
 	}
 
 	return campaign.ID, nil

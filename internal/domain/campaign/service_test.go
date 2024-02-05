@@ -7,6 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/vinialeixo/email-markegint/internal/dto"
+	"github.com/vinialeixo/email-markegint/internal/helper"
 )
 
 // preciso simular um banco de dados mock.Mock
@@ -72,6 +73,6 @@ func Test_Create_ValidateRepositorySave(t *testing.T) {
 	service.Repository = repositoryMock
 	_, err := service.Create(newCampaign)
 
-	assert.Equal("error to save on database", err.Error())
+	assert.True(errors.Is(helper.ErrInternal, err))
 
 }
